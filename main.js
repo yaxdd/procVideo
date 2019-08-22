@@ -1,26 +1,28 @@
+//importo las librerias de openCV
 const cv = require('opencv4nodejs');
 
+//Cargo mi imagen de prueba
 const input = cv.imread('OP.jpg');
-// let outputGray = rgb2Gray(input);
-// let outputRGBN = rgb2RgbN(input);
+
+//llamo a las funciones de conversion creadas
+let outputGray = rgb2Gray(input);
+let outputRGBN = rgb2RgbN(input);
 let outputYCbCr = rgb2YCbCr(input);
 
 
-// //Guardo las imagenes que yo genero
-// cv.imwrite('gray.jpg', outputGray);
-// cv.imwrite('normalized.jpg', outputRGBN);
+// //Guardo las imagenes en archivos nuevos
+ cv.imwrite('gray.jpg', outputGray);
+ cv.imwrite('normalized.jpg', outputRGBN);
 cv.imwrite('YCbCr.jpg', outputYCbCr)
 
-// //guardo las imagenes que me genera openCV
+//guardo las imagenes que me genera openCV
 
-// outputGray = input.cvtColor(cv.COLOR_RGB2GRAY)
+ outputGray = input.cvtColor(cv.COLOR_RGB2GRAY)
 // outputRGBN = input.normalize(1, 0, cv.NORM_MINMAX, -1)//no se como usarla
-// outputYCbCr = input.cvtColor(cv.COLOR_RGB2YCrCb)
-// cv.imwrite('YCbCr2.jpg', outputYCbCr);
-// cv.imwrite('gray2.jpg', outputGray);
+ outputYCbCr = input.cvtColor(cv.COLOR_RGB2YCrCb)
+ cv.imwrite('YCbCr2.jpg', outputYCbCr);
+ cv.imwrite('gray2.jpg', outputGray);
 // cv.imwrite('normalized2.jpg', outputRGBN);
-
-
 function rgb2Gray(image) {
   let output = new cv.Mat(image.sizes[0], image.sizes[1], cv.CV_8UC1)
   for (let i = 0; i < image.sizes[0]; i++) {
@@ -33,7 +35,6 @@ function rgb2Gray(image) {
   }
   return output;
 }
-
 function rgb2RgbN(image) {
   let output = new cv.Mat(image.sizes[0], image.sizes[1], cv.CV_8UC3)
   for (let i = 0; i < image.sizes[0]; i++) {
@@ -52,7 +53,6 @@ function rgb2RgbN(image) {
   }
   return output
 }
-
 function rgb2YCbCr(image){
   let YCbCrMatrix = [
     [0.299, 0.587, 0.114],
