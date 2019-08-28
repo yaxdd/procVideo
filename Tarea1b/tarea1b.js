@@ -46,7 +46,7 @@ async function asyncCombine(nameA, nameB, nameMask) {
     if ((aX === bX) && (aY === bY)) {
         sizeX = aX;
         sizeY = aY;
-        //binarizo la imagen mascara
+        //binarizo la imagen mascara con una funcion asincrona
         alpha = await image2BinaryAsync(mask);
         //genero la imagen de salida vacia
         output = new cv.Mat(sizeX, sizeY, cv.CV_8UC3)
