@@ -68,6 +68,7 @@ async function asyncCombine(nameA, nameB, nameMask) {
                     pixelG = aG * alphaG + (1 - alphaG) * bG,
                     pixelR = aR * alphaR + (1 - alphaR) * bR;
                 //guardo el pixel en la imagen de salida
+                
                 output.set(i, j, [pixelB, pixelG, pixelR])
             }
         }
