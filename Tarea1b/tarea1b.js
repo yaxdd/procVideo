@@ -46,7 +46,7 @@ async function asyncCombine(nameA, nameB, nameMask) {
     if ((aX === bX) && (aY === bY)) {
         sizeX = aX;
         sizeY = aY;
-        //binarizo la imagen mascara con una funcion asincrona
+        //binarizo la imagen mascara con una funcion asincrona //experimental
         alpha = await image2BinaryAsync(mask);
         //genero la imagen de salida vacia
         output = new cv.Mat(sizeX, sizeY, cv.CV_8UC3)
@@ -118,18 +118,3 @@ async function image2BinaryAsync(image) {
     await Promise.all(arrayPromises).then(response => {})
     return output
 }
-
-(async () => {
-    let image = cv.imread('greenscreenMask.bmp')
-    console.time("test")
-    let im1 = image2BinaryAsync(image);
-    console.log(im1)
-    console.log("termino el proceso asyncrono")
-    // await cv.imwriteAsync('imAsync.bmp', im1)
-    // console.timeEnd("test")
-    // console.time("test2")
-    // let im2 = image2Binary(image)
-    // cv.imwrite('imsync.bmp', im2)
-    // console.log("termino la wea sincrona")
-    // console.timeEnd("test2")
-});
