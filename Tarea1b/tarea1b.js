@@ -1,5 +1,11 @@
+/**
+ * Programa: tarea1b.js
+ * Descripcion : Combina 2 imagenes utilizando al tecnica alpha mating
+ * Autor: Yael Diaz
+ */
+
 // LLamo las librerias de openCV para nodeJS
-const cv = require('opencv4nodejs');
+let cv = require('opencv4nodejs')
 //llamo a la funcion de forma asincrona y la resuelvo 
 console.time("combine")
 asyncCombine('greenscreen.bmp', 'fondo.bmp', 'greenscreenMask.bmp').then(response => {
@@ -47,7 +53,7 @@ async function asyncCombine(nameA, nameB, nameMask) {
         sizeX = aX;
         sizeY = aY;
         //binarizo la imagen mascara con una funcion asincrona //experimental
-        alpha = await image2BinaryAsync(mask);
+        alpha = image2Binary(mask);
         //genero la imagen de salida vacia
         output = new cv.Mat(sizeX, sizeY, cv.CV_8UC3)
         console.timeLog("combine", "validaciones terminadas")
@@ -86,10 +92,10 @@ function image2Binary(image) {
     for (let i = 0; i < sizeX; i++) {
         for (let j = 0; j < sizeY; j++) {
             let [b, g, r] = image.atRaw(i, j);
-            nr = r > 0 ? 1 : 0;
-            ng = g > 0 ? 1 : 0;
-            nb = b > 0 ? 1 : 0;
-            output.set(i, j, [nb, ng, nr])
+            nR = r=== 255 ? 1 : 0;
+            nG = g=== 255 ? 1 : 0;
+            nB = b=== 255 ? 1 : 0;
+            output.set(i, j, [nB, nG, nR])
         }
     }
     return output
